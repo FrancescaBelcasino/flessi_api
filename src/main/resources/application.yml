@@ -1,3 +1,7 @@
 spring:
   application:
     name: api
+  data:
+    mongodb:
+      uri: ${DB_CONNECTION_STRING}
+      database: flessi
