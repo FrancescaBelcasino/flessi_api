@@ -9,11 +9,12 @@
 
 # Mobile Tools for Java (J2ME)
 .idea
+target
 *.iws
 *.iml
 *.ipr
 
-# Package Files #
+# Package Files #s
 *.jar
 *.war
 *.nar
