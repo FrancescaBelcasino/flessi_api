@@ -3,9 +3,11 @@ package org.flessi.api.service;
 import lombok.AllArgsConstructor;
 import org.flessi.api.model.dto.request.CreateCompanyRequest;
 import org.flessi.api.model.dto.request.CreateWorkerRequest;
+import org.flessi.api.model.dto.request.LoginRequest;
 import org.flessi.api.model.entity.Company;
 import org.flessi.api.model.entity.Worker;
 import org.flessi.api.repository.CompanyRepository;
+import org.flessi.api.repository.UserRepository;
 import org.flessi.api.repository.WorkerRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
     private WorkerRepository workerRepository;
     private CompanyRepository companyRepository;
+    private UserRepository userRepository;
 
     public String createWorker(CreateWorkerRequest request) {
         var worker = workerRepository.save(
@@ -53,5 +56,10 @@ public class UserService {
         return company.getId();
     }
 
-
+    public boolean genericLogin(LoginRequest request){
+        return userRepository
+                .findByEmail(request.getEmail())
+                .filter(user -> user.getPassword().equals(request.getPassword()))
+                .isPresent();
+    }
 }

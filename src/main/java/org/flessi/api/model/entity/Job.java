@@ -25,8 +25,8 @@ public class Job {
     private String city;
     private String postalCode;
     private Float amountToPay;
+    private Float amountPerHour;
     private String category;
-    private List<String> skills;
     private List<String> requirements;
 
 }
