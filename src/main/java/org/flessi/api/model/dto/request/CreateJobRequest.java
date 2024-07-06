@@ -3,9 +3,6 @@ package org.flessi.api.model.dto.request;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.flessi.api.model.enums.Category;
-import org.flessi.api.model.enums.Requirement;
-import org.flessi.api.model.enums.Skill;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -25,7 +22,7 @@ public class CreateJobRequest {
     private String city;
     private String postalCode;
     private Float amountToPay;
-    private Category category;
-    private List<Skill> skills;
-    private List<Requirement> requirements;
+    private Float amountPerHour;
+    private String category;
+    private List<String> requirements;
 }

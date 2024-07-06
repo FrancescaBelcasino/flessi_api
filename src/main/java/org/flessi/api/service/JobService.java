@@ -6,6 +6,8 @@ import org.flessi.api.model.entity.Job;
 import org.flessi.api.repository.JobRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class JobService {
@@ -24,16 +26,16 @@ public class JobService {
                         .city(request.getCity())
                         .postalCode(request.getPostalCode())
                         .amountToPay(request.getAmountToPay())
-                        .category(request.getCategory().name())
-                        .skills(request.getSkills().stream()
-                                .map(Enum::name)
-                                .toList())
-                        .requirements(request.getRequirements().stream().
-                                map(Enum::name)
-                                .toList())
+                        .amountPerHour(request.getAmountPerHour())
+                        .category(request.getCategory())
+                        .requirements(request.getRequirements())
                         .build()
         );
 
         return jobOffer.getId();
+    }
+
+    public List<Job> fetchAllJobs() {
+        return jobRepository.findAll();
     }
 }

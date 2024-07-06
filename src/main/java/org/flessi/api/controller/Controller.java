@@ -1,15 +1,15 @@
 package org.flessi.api.controller;
 
 import lombok.AllArgsConstructor;
-import org.flessi.api.model.dto.request.CreateApplicationRequest;
-import org.flessi.api.model.dto.request.CreateCompanyRequest;
-import org.flessi.api.model.dto.request.CreateJobRequest;
-import org.flessi.api.model.dto.request.CreateWorkerRequest;
+import org.flessi.api.model.dto.request.*;
 import org.flessi.api.model.dto.response.IdResponse;
+import org.flessi.api.model.dto.response.ResultResponse;
+import org.flessi.api.model.dto.response.ResultsResponse;
 import org.flessi.api.service.ApplicationService;
 import org.flessi.api.service.JobService;
 import org.flessi.api.service.UserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,6 +35,15 @@ public class Controller {
         return ResponseEntity.ok(new IdResponse(id));
     }
 
+    @PostMapping("/users/login-worker")
+    public ResponseEntity<?> genericLogin(@RequestBody LoginRequest request) {
+        var loggedIn = service.genericLogin(request);
+
+        return loggedIn ?
+                ResponseEntity.ok(new ResultResponse(true)) :
+                ResponseEntity.badRequest().build();
+    }
+
     @PostMapping("/jobs/create-offer")
     public ResponseEntity<IdResponse> createJobOffer(@RequestBody CreateJobRequest request) {
         var id = jobService.createJobOffer(request);
@@ -48,4 +57,12 @@ public class Controller {
 
         return ResponseEntity.ok(new IdResponse(id));
     }
+
+    @GetMapping("/jobs/all-jobs")
+    public ResponseEntity<ResultsResponse> fetchAllJobs() {
+        var jobs = jobService.fetchAllJobs();
+
+        return ResponseEntity.ok(new ResultsResponse(jobs));
+    }
+
 }
