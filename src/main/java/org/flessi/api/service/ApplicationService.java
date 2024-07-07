@@ -12,7 +12,7 @@ public class ApplicationService {
     private ApplicationRepository applicationRepository;
 
     public String applyToJob (CreateApplicationRequest request){
-        var application = applicationRepository.save(
+        Application application = applicationRepository.save(
                 Application.builder()
                         .workerId(request.getWorkerId())
                         .jobId(request.getJobId())

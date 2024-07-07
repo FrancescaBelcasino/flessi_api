@@ -1,5 +1,10 @@
 package org.flessi.api.model.dto.response;
 
-public record IdResponse(
-        String id
-) {}
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
+public class IdResponse {
+    private String id;
+}

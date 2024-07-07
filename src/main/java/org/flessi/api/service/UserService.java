@@ -19,7 +19,7 @@ public class UserService {
     private UserRepository userRepository;
 
     public String createWorker(CreateWorkerRequest request) {
-        var worker = workerRepository.save(
+        Worker worker = workerRepository.save(
                 Worker.builder()
                         .name(request.getName())
                         .surname(request.getSurname())
@@ -38,7 +38,7 @@ public class UserService {
     }
 
     public String createCompany (CreateCompanyRequest request) {
-        var company = companyRepository.save(
+        Company company = companyRepository.save(
                 Company.builder()
                         .name(request.getName())
                         .cuit(request.getCuit())
