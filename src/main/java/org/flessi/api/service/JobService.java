@@ -14,7 +14,7 @@ public class JobService {
     private JobRepository jobRepository;
 
     public String createJobOffer(CreateJobRequest request){
-        var jobOffer = jobRepository.save(
+        Job jobOffer = jobRepository.save(
                 Job.builder()
                         .title(request.getTitle())
                         .description(request.getDescription())

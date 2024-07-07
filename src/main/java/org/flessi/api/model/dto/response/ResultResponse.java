@@ -1,5 +1,11 @@
 package org.flessi.api.model.dto.response;
 
-public record ResultResponse(
-        Object result
-) {}
+import lombok.Getter;
+import lombok.AllArgsConstructor;
+
+@Getter
+@AllArgsConstructor
+public class ResultResponse {
+    private Object result;
+}
+
