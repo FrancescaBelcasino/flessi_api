@@ -10,15 +10,16 @@ import org.flessi.api.service.ApplicationService;
 import org.flessi.api.service.JobService;
 import org.flessi.api.service.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 @RestController
 @AllArgsConstructor
+@CrossOrigin(origins = "*", methods = {GET, POST})
 public class Controller {
     private UserService service;
     private JobService jobService;
