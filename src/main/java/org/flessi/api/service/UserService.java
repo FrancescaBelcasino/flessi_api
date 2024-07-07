@@ -29,7 +29,6 @@ public class UserService {
                         .phone(request.getPhone())
                         .address(request.getAddress())
                         .city(request.getCity())
-                        .postalCode(request.getPostalCode())
                         .type("WORKER")
                         .build()
         );
@@ -48,7 +47,6 @@ public class UserService {
                         .password(request.getPassword())
                         .address(request.getAddress())
                         .city(request.getCity())
-                        .postalCode(request.getPostalCode())
                         .type("COMPANY")
                         .build()
         );

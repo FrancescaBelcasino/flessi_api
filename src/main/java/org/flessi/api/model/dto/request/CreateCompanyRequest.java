@@ -16,7 +16,6 @@ public class CreateCompanyRequest {
     private String password;
     private String address;
     private String city;
-    private String postalCode;
     private Integer cantRatings;
     private Integer sumRatings;
 }
