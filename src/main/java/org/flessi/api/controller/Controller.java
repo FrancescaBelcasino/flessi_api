@@ -3,7 +3,6 @@ package org.flessi.api.controller;
 import lombok.AllArgsConstructor;
 import org.flessi.api.model.dto.request.*;
 import org.flessi.api.model.dto.response.IdResponse;
-import org.flessi.api.model.dto.response.ResultResponse;
 import org.flessi.api.model.dto.response.ResultsResponse;
 import org.flessi.api.model.entity.Job;
 import org.flessi.api.service.ApplicationService;
@@ -40,11 +39,11 @@ public class Controller {
     }
 
     @PostMapping("/users/login")
-    public ResponseEntity<ResultResponse> genericLogin(@RequestBody LoginRequest request) {
-        boolean loggedIn = service.genericLogin(request);
+    public ResponseEntity<IdResponse> genericLogin(@RequestBody LoginRequest request) {
+        String userID = service.genericLogin(request);
 
-        return loggedIn ?
-                ResponseEntity.ok(new ResultResponse(true)) :
+        return userID != null ?
+                ResponseEntity.ok(new IdResponse(userID)) :
                 ResponseEntity.badRequest().build();
     }
 
