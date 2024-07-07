@@ -12,17 +12,16 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class CreateJobRequest {
+    private String companyID;
     private String title;
     private String description;
+    private String category;
     private LocalDate date;
     private LocalTime startTime;
     private LocalTime endTime;
-    private String companyID;
     private String address;
     private String city;
-    private String postalCode;
     private Float amountToPay;
     private Float amountPerHour;
-    private String category;
     private List<String> requirements;
 }

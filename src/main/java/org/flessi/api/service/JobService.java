@@ -24,7 +24,6 @@ public class JobService {
                         .companyID(request.getCompanyID())
                         .address(request.getAddress())
                         .city(request.getCity())
-                        .postalCode(request.getPostalCode())
                         .amountToPay(request.getAmountToPay())
                         .amountPerHour(request.getAmountPerHour())
                         .category(request.getCategory())
