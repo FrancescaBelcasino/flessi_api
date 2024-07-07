@@ -38,7 +38,7 @@ public class Controller {
         return ResponseEntity.ok(new IdResponse(id));
     }
 
-    @PostMapping("/users/login-worker")
+    @PostMapping("/users/login")
     public ResponseEntity<ResultResponse> genericLogin(@RequestBody LoginRequest request) {
         boolean loggedIn = service.genericLogin(request);
 
@@ -61,7 +61,7 @@ public class Controller {
         return ResponseEntity.ok(new IdResponse(id));
     }
 
-    @GetMapping("/jobs/all-jobs")
+    @GetMapping("/jobs")
     public ResponseEntity<ResultsResponse> fetchAllJobs() {
         List<Job> jobs = jobService.fetchAllJobs();
 

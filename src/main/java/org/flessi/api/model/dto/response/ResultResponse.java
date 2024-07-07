@@ -1,7 +1,7 @@
 package org.flessi.api.model.dto.response;
 
-import lombok.Getter;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
