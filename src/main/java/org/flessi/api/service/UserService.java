@@ -5,6 +5,7 @@ import org.flessi.api.model.dto.request.CreateCompanyRequest;
 import org.flessi.api.model.dto.request.CreateWorkerRequest;
 import org.flessi.api.model.dto.request.LoginRequest;
 import org.flessi.api.model.entity.Company;
+import org.flessi.api.model.entity.User;
 import org.flessi.api.model.entity.Worker;
 import org.flessi.api.repository.CompanyRepository;
 import org.flessi.api.repository.UserRepository;
@@ -54,10 +55,11 @@ public class UserService {
         return company.getId();
     }
 
-    public boolean genericLogin(LoginRequest request){
+    public String genericLogin(LoginRequest request){
         return userRepository
                 .findByEmail(request.getEmail())
                 .filter(user -> user.getPassword().equals(request.getPassword()))
-                .isPresent();
+                .map(User::getId)
+                .orElse(null);
     }
 }
