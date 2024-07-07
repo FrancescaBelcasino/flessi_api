@@ -22,5 +22,4 @@ public class Worker {
     private String city;
     private Integer cantRatings;
     private Integer sumRatings;
-
 }

@@ -23,10 +23,8 @@ public class Job {
     private String companyID;
     private String address;
     private String city;
-    private String postalCode;
     private Float amountToPay;
     private Float amountPerHour;
     private String category;
     private List<String> requirements;
-
 }
