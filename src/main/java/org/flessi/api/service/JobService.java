@@ -18,7 +18,7 @@ public class JobService {
                 Job.builder()
                         .title(request.getTitle())
                         .description(request.getDescription())
-                        .date(request.getDate())
+                        .image(request.getImage())
                         .startTime(request.getStartTime())
                         .endTime(request.getEndTime())
                         .companyID(request.getCompanyID())

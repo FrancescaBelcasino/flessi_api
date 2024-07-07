@@ -5,7 +5,6 @@ import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -17,14 +16,15 @@ public class Job {
     private String id;
     private String title;
     private String description;
-    private LocalDate date;
+    private String category;
+    private String image;
     private LocalTime startTime;
     private LocalTime endTime;
-    private String companyID;
     private String address;
     private String city;
     private Float amountToPay;
     private Float amountPerHour;
-    private String category;
     private List<String> requirements;
+
+    private String companyID;
 }

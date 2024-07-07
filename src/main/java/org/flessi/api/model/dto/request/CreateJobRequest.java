@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -16,7 +15,7 @@ public class CreateJobRequest {
     private String title;
     private String description;
     private String category;
-    private LocalDate date;
+    private String image;
     private LocalTime startTime;
     private LocalTime endTime;
     private String address;
