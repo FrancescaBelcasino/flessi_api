@@ -12,6 +12,7 @@ import org.flessi.api.repository.UserRepository;
 import org.flessi.api.repository.WorkerRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
@@ -32,6 +33,9 @@ public class UserService {
                         .phone(request.getPhone())
                         .address(request.getAddress())
                         .city(request.getCity())
+                        .skills(new ArrayList<>())
+                        .interests(new ArrayList<>())
+                        .experiences(new ArrayList<>())
                         .type("WORKER")
                         .build()
         );
@@ -72,5 +76,41 @@ public class UserService {
     public Optional<Company> fetchCompany(String companyID) {
         return companyRepository
                 .findById(companyID);
+    }
+
+    public String addWorkerSkill(String workerID, String skill) {
+        Optional<Worker> worker = workerRepository.findById(workerID);
+
+        worker.ifPresent(w -> {
+            w.getSkills().add(skill);
+
+            workerRepository.save(w);
+        });
+
+        return worker.isPresent() ? skill : null;
+    }
+
+    public String addWorkerInterest(String workerID, String interest) {
+        Optional<Worker> worker = workerRepository.findById(workerID);
+
+        worker.ifPresent(w -> {
+            w.getInterests().add(interest);
+
+            workerRepository.save(w);
+        });
+
+        return worker.isPresent() ? interest : null;
+    }
+
+    public String addWorkerExperience(String workerID, String experience) {
+        Optional<Worker> worker = workerRepository.findById(workerID);
+
+        worker.ifPresent(w -> {
+            w.getExperiences().add(experience);
+
+            workerRepository.save(w);
+        });
+
+        return worker.isPresent() ? experience : null;
     }
 }

@@ -26,6 +26,10 @@ public class Worker implements Serializable {
     private String city;
     private Integer sumRatings;
 
+    private List<String> interests;
+    private List<String> skills;
+    private List<String> experiences;
+
     private transient List<Job> applications;
 
     @JsonIgnore

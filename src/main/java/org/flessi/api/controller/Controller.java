@@ -72,6 +72,30 @@ public class Controller {
                 .orElse(ResponseEntity.badRequest().build());
     }
 
+    @PatchMapping("/users/workers/{workerID}/add-attribute")
+    public ResponseEntity<ResultResponse> addWorkerAttribute(@PathVariable String workerID,
+                                                             @RequestBody AddAttributeRequest request)
+    {
+        String response = null;
+        switch (request.getType().toUpperCase()) {
+            case "SKILL":
+                response = userService.addWorkerSkill(workerID, request.getValue());
+                break;
+            case "INTEREST":
+                response = userService.addWorkerInterest(workerID, request.getValue());
+                break;
+            case "EXPERIENCE":
+                response = userService.addWorkerExperience(workerID, request.getValue());
+                break;
+            default:
+                break;
+        }
+
+        return response != null ?
+                ResponseEntity.ok(new ResultResponse(response)) :
+                ResponseEntity.badRequest().build();
+    }
+
     @PostMapping("/jobs/create-offer")
     public ResponseEntity<IdResponse> createJobOffer(@RequestBody CreateJobRequest request) {
         String id = jobService.createJobOffer(request);
