@@ -14,12 +14,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @RestController
 @AllArgsConstructor
-@CrossOrigin(origins = "*", methods = {GET, POST})
+@CrossOrigin(origins = "*", methods = {GET, POST, PATCH})
 public class Controller {
     private JobService jobService;
     private UserService userService;
