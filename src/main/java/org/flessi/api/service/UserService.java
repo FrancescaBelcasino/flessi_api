@@ -12,6 +12,8 @@ import org.flessi.api.repository.UserRepository;
 import org.flessi.api.repository.WorkerRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 public class UserService {
@@ -55,11 +57,20 @@ public class UserService {
         return company.getId();
     }
 
-    public String genericLogin(LoginRequest request){
+    public Optional<String> genericLogin(LoginRequest request){
         return userRepository
                 .findByEmail(request.getEmail())
                 .filter(user -> user.getPassword().equals(request.getPassword()))
-                .map(User::getId)
-                .orElse(null);
+                .map(User::getId);
+    }
+
+    public Optional<Worker> fetchWorker(String workerID) {
+        return workerRepository
+                .findById(workerID);
+    }
+
+    public Optional<Company> fetchCompany(String companyID) {
+        return companyRepository
+                .findById(companyID);
     }
 }

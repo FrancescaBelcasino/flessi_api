@@ -6,6 +6,7 @@ import org.flessi.api.model.entity.Job;
 import org.flessi.api.repository.JobRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -36,5 +37,11 @@ public class JobService {
 
     public List<Job> fetchAllJobs() {
         return jobRepository.findAll();
+    }
+
+    public List<Job> fetchJobsByIds(List<String> ids) {
+        List<Job> jobs = new ArrayList<>();
+        jobRepository.findAllById(ids).forEach(jobs::add);
+        return jobs;
     }
 }
