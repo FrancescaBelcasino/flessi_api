@@ -1,14 +1,18 @@
 package org.flessi.api.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
+import java.util.List;
+
 @Getter
-@Builder
+@Builder(toBuilder = true)
 @Document(collection = "users")
-public class Worker {
+public class Worker implements Serializable {
     @Id
     private String id;
     private String type;
@@ -20,6 +24,10 @@ public class Worker {
     private String phone;
     private String address;
     private String city;
-    private Integer cantRatings;
     private Integer sumRatings;
+
+    private transient List<Job> applications;
+
+    @JsonIgnore
+    private Integer cantRatings;
 }

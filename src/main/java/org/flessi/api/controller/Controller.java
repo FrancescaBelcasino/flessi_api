@@ -3,6 +3,7 @@ package org.flessi.api.controller;
 import lombok.AllArgsConstructor;
 import org.flessi.api.model.dto.request.*;
 import org.flessi.api.model.dto.response.IdResponse;
+import org.flessi.api.model.dto.response.ResultResponse;
 import org.flessi.api.model.dto.response.ResultsResponse;
 import org.flessi.api.model.entity.Job;
 import org.flessi.api.service.ApplicationService;
@@ -20,31 +21,55 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @AllArgsConstructor
 @CrossOrigin(origins = "*", methods = {GET, POST})
 public class Controller {
-    private UserService service;
     private JobService jobService;
+    private UserService userService;
     private ApplicationService applicationService;
 
     @PostMapping("/users/register-worker")
     public ResponseEntity<IdResponse> registerWorker(@RequestBody CreateWorkerRequest request) {
-        String id = service.createWorker(request);
+        String id = userService.createWorker(request);
 
         return ResponseEntity.ok(new IdResponse(id));
     }
 
     @PostMapping("/users/register-company")
     public ResponseEntity<IdResponse> registerCompany(@RequestBody CreateCompanyRequest request) {
-        String id = service.createCompany(request);
+        String id = userService.createCompany(request);
 
         return ResponseEntity.ok(new IdResponse(id));
     }
 
     @PostMapping("/users/login")
     public ResponseEntity<IdResponse> genericLogin(@RequestBody LoginRequest request) {
-        String userID = service.genericLogin(request);
+        return userService.genericLogin(request)
+                .map(id -> ResponseEntity.ok(new IdResponse(id)))
+                .orElse(ResponseEntity.badRequest().build());
+    }
 
-        return userID != null ?
-                ResponseEntity.ok(new IdResponse(userID)) :
-                ResponseEntity.badRequest().build();
+    @GetMapping("/users/workers/{workerID}")
+    public ResponseEntity<ResultResponse> fetchWorker(@PathVariable String workerID) {
+        return userService.fetchWorker(workerID)
+                .map(worker -> worker.toBuilder()
+                        .applications(
+                                jobService.fetchJobsByIds(
+                                        applicationService.fetchApplicationIds(workerID)))
+                        .build())
+                .map(ResultResponse::new)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.badRequest().build());
+    }
+
+    @GetMapping("/users/companies/{companyID}")
+    public ResponseEntity<ResultResponse> fetchCompany(@PathVariable String companyID) {
+        return userService.fetchCompany(companyID)
+                .map(company -> company.toBuilder()
+                        .offers(
+                                jobService.fetchJobsByIds(
+                                        applicationService.fetchApplicationIds(companyID)))
+                        .build())
+                .map(ResultResponse::new)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.badRequest().build());
     }
 
     @PostMapping("/jobs/create-offer")
